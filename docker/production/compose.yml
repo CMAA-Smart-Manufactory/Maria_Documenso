@@ -90,7 +90,7 @@ services:
       SERVICE_NAME_DATABASE: database
       SERVICE_NAME_DOCUMENSO: documenso
     ports:
-      - '3030:3000'
+      - '9000:9000'
     volumes:
       - '/opt/documenso/cert.p12:/opt/documenso/cert.p12:ro'
     container_name: documenso-y8ccsogw0oskwo0cwwcc08o8-184144169641
