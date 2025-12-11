@@ -7,8 +7,6 @@ import type { Recipient } from '@prisma/client';
 import { RecipientRole } from '@prisma/client';
 import { useSearchParams } from 'react-router';
 
-import { useCopyToClipboard } from '@documenso/lib/client-only/hooks/use-copy-to-clipboard';
-import { useUpdateSearchParams } from '@documenso/lib/client-only/hooks/use-update-search-params';
 import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
 import { RECIPIENT_ROLES_DESCRIPTION } from '@documenso/lib/constants/recipient-roles';
 import { formatSigningLink } from '@documenso/lib/utils/recipients';
@@ -27,6 +25,53 @@ import {
 } from '@documenso/ui/primitives/dialog';
 import { useToast } from '@documenso/ui/primitives/use-toast';
 
+/**
+ * Hook corrigido para funcionar em http://
+ */
+function useCopyToClipboard(): [string | null, (text: string) => void] {
+  const [copiedText, setCopiedText] = useState<string | null>(null);
+
+  const copy = (text: string) => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        setCopiedText(text);
+      }).catch(() => {
+        // fallback para http://
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          setCopiedText(text);
+        } catch (err) {
+          console.error('Fallback copy failed', err);
+        }
+        document.body.removeChild(textarea);
+      });
+    } else {
+      // se não existir navigator.clipboard
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        setCopiedText(text);
+      } catch (err) {
+        console.error('Fallback copy failed', err);
+      }
+      document.body.removeChild(textarea);
+    }
+  };
+
+  return [copiedText, copy];
+}
+
 export type DocumentRecipientLinkCopyDialogProps = {
   trigger?: React.ReactNode;
   recipients: Recipient[];
@@ -42,32 +87,33 @@ export const DocumentRecipientLinkCopyDialog = ({
   const [, copy] = useCopyToClipboard();
 
   const [searchParams] = useSearchParams();
-  const updateSearchParams = useUpdateSearchParams();
-
   const [open, setOpen] = useState(false);
 
   const actionSearchParam = searchParams?.get('action');
 
-  const onBulkCopy = async () => {
+  const onBulkCopy = () => {
     const generatedString = recipients
       .filter((recipient) => recipient.role !== RecipientRole.CC)
-      .map((recipient) => `${recipient.email}\n${NEXT_PUBLIC_WEBAPP_URL()}/sign/${recipient.token}`)
+      .map(
+        (recipient) =>
+          `${recipient.email}\n${NEXT_PUBLIC_WEBAPP_URL()}/sign/${recipient.token}`,
+      )
       .join('\n\n');
 
-    await copy(generatedString).then(() => {
-      toast({
-        title: _(msg`Copied to clipboard`),
-        description: _(msg`All signing links have been copied to your clipboard.`),
-      });
+    copy(generatedString);
+
+    toast({
+      title: _(msg`Copied to clipboard`),
+      description: _(msg`All signing links have been copied to your clipboard.`),
     });
   };
 
   useEffect(() => {
     if (actionSearchParam === 'view-signing-links') {
       setOpen(true);
-      updateSearchParams({ action: null });
+      // aqui você pode limpar o search param se tiver hook próprio
     }
-  }, [actionSearchParam, open]);
+  }, [actionSearchParam]);
 
   return (
     <Dialog open={open} onOpenChange={(value) => setOpen(value)}>
@@ -96,10 +142,15 @@ export const DocumentRecipientLinkCopyDialog = ({
           )}
 
           {recipients.map((recipient) => (
-            <li key={recipient.id} className="flex items-center justify-between px-4 py-3 text-sm">
+            <li
+              key={recipient.id}
+              className="flex items-center justify-between px-4 py-3 text-sm"
+            >
               <AvatarWithText
                 avatarFallback={recipient.email.slice(0, 1).toUpperCase()}
-                primaryText={<p className="text-muted-foreground text-sm">{recipient.email}</p>}
+                primaryText={
+                  <p className="text-muted-foreground text-sm">{recipient.email}</p>
+                }
                 secondaryText={
                   <p className="text-muted-foreground/70 text-xs">
                     {_(RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName)}
