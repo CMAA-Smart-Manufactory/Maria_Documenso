@@ -32,17 +32,17 @@ export const TemplateDocumentCompleted = ({
                 src={getAssetUrl('/static/completed.png')}
                 className="-mt-0.5 mr-2 inline h-7 w-7 align-middle"
               />
-              <Trans>Completed</Trans>
+              <Trans>Concluída</Trans>
             </Text>
           </Column>
         </Section>
 
-        <Text className="text-primary mb-0 text-center text-lg font-semibold">
-          {customBody || <Trans>“{documentName}” was signed by all signers</Trans>}
+        <Text className="mb-0 text-center text-lg font-semibold text-primary">
+          {customBody || <Trans>“{documentName}” foi assinado por todos os signatários</Trans>}
         </Text>
 
         <Text className="my-1 text-center text-base text-slate-400">
-          <Trans>Continue by downloading the document.</Trans>
+          <Trans>Prossiga fazendo o download do documento.</Trans>
         </Text>
 
         <Section className="mb-6 mt-8 text-center">

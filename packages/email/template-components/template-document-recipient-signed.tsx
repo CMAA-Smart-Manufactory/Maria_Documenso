@@ -34,19 +34,19 @@ export const TemplateDocumentRecipientSigned = ({
                 src={getAssetUrl('/static/completed.png')}
                 className="-mt-0.5 mr-2 inline h-7 w-7 align-middle"
               />
-              <Trans>Completed</Trans>
+              <Trans>Concluída</Trans>
             </Text>
           </Column>
         </Section>
 
-        <Text className="text-primary mb-0 text-center text-lg font-semibold">
+        <Text className="mb-0 text-center text-lg font-semibold text-primary">
           <Trans>
-            {recipientReference} has signed "{documentName}"
+            {recipientReference} assinou "{documentName}"
           </Trans>
         </Text>
 
         <Text className="mx-auto mb-6 mt-1 max-w-[80%] text-center text-base text-slate-400">
-          <Trans>{recipientReference} has completed signing the document.</Trans>
+          <Trans>{recipientReference} já concluiu a assinatura do documento.</Trans>
         </Text>
       </Section>
     </>

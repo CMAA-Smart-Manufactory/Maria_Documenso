@@ -11,7 +11,7 @@ const themeConfig: DocsThemeConfig = {
 
     return (
       <>
-        <meta httpEquiv="Content-Language" content="en" />
+        <meta httpEquiv="Content-Language" content="pt-BR" />
         <title>{title}</title>
         <meta name="title" content={title} />
         <meta name="og:title" content={title} />

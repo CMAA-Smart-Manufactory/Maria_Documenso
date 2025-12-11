@@ -28,19 +28,19 @@ export const TemplateAccessAuth2FA = ({
 
       <Section className="mt-8">
         <Heading className="text-center text-lg font-semibold text-slate-900">
-          <Trans>Verification Code Required</Trans>
+          <Trans>Código de verificação necessário</Trans>
         </Heading>
 
         <Text className="mt-2 text-center text-slate-700">
           <Trans>
-            Hi {userName}, you need to enter a verification code to complete the document "
+            Hi {userName}, Você precisa inserir um código de verificação para concluir o documento "
             {documentTitle}".
           </Trans>
         </Text>
 
         <Section className="mt-6 rounded-lg bg-slate-50 p-6 text-center">
           <Text className="mb-2 text-sm font-medium text-slate-600">
-            <Trans>Your verification code:</Trans>
+            <Trans>Seu código de verificação:</Trans>
           </Text>
           <Text className="text-2xl font-bold tracking-wider text-slate-900">{code}</Text>
         </Section>
@@ -55,7 +55,8 @@ export const TemplateAccessAuth2FA = ({
 
         <Text className="mt-4 text-center text-sm text-slate-500">
           <Trans>
-            If you didn't request this verification code, you can safely ignore this email.
+            Se você não solicitou este código de verificação, pode ignorar este e-mail sem
+            problemas.
           </Trans>
         </Text>
       </Section>

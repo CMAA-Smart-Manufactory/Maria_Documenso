@@ -19,27 +19,27 @@ export function TemplateDocumentRejectionConfirmed({
     <Container>
       <Section>
         <Heading className="text-2xl font-semibold">
-          <Trans>Rejection Confirmed</Trans>
+          <Trans>Rejeição confirmada</Trans>
         </Heading>
 
-        <Text className="text-primary text-base">
+        <Text className="text-base text-primary">
           <Trans>
-            This email confirms that you have rejected the document{' '}
-            <strong className="font-bold">"{documentName}"</strong> sent by {documentOwnerName}.
+            Este e-mail confirma que você rejeitou o documento.{' '}
+            <strong className="font-bold">"{documentName}"</strong> enviado por {documentOwnerName}.
           </Trans>
         </Text>
 
         {reason && (
           <Text className="text-base font-medium text-slate-400">
-            <Trans>Rejection reason: {reason}</Trans>
+            <Trans>Motivo da rejeição: {reason}</Trans>
           </Text>
         )}
 
         <Text className="text-base">
           <Trans>
-            The document owner has been notified of this rejection. No further action is required
-            from you at this time. The document owner may contact you with any questions regarding
-            this rejection.
+            O proprietário do documento foi notificado desta rejeição. Nenhuma ação adicional é
+            necessária da sua parte neste momento. O proprietário do documento poderá entrar em
+            contato com você caso tenha alguma dúvida sobre esta rejeição.
           </Trans>
         </Text>
       </Section>

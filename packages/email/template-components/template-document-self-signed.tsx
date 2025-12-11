@@ -34,26 +34,26 @@ export const TemplateDocumentSelfSigned = ({
                 src={getAssetUrl('/static/completed.png')}
                 className="-mt-0.5 mr-2 inline h-7 w-7 align-middle"
               />
-              <Trans>Completed</Trans>
+              <Trans>Concluída</Trans>
             </Text>
           </Column>
         </Section>
 
-        <Text className="text-primary mb-0 mt-6 text-center text-lg font-semibold">
-          <Trans>You have signed “{documentName}”</Trans>
+        <Text className="mb-0 mt-6 text-center text-lg font-semibold text-primary">
+          <Trans>Você assinou “{documentName}”</Trans>
         </Text>
 
         <Text className="mx-auto mb-6 mt-1 max-w-[80%] text-center text-base text-slate-400">
           <Trans>
-            Create a{' '}
+            Crie um{' '}
             <Link
               href={signUpUrl}
               target="_blank"
-              className="text-documenso-700 hover:text-documenso-600 whitespace-nowrap"
+              className="whitespace-nowrap text-documenso-700 hover:text-documenso-600"
             >
-              free account
+              conta gratuita
             </Link>{' '}
-            to access your signed documents at any time.
+            Para acessar seus documentos assinados a qualquer momento.
           </Trans>
         </Text>
 
@@ -66,7 +66,7 @@ export const TemplateDocumentSelfSigned = ({
               src={getAssetUrl('/static/user-plus.png')}
               className="mb-0.5 mr-2 inline h-5 w-5 align-middle"
             />
-            <Trans>Create account</Trans>
+            <Trans>Criar uma conta</Trans>
           </Button>
 
           <Button
@@ -77,7 +77,7 @@ export const TemplateDocumentSelfSigned = ({
               src={getAssetUrl('/static/review.png')}
               className="mb-0.5 mr-2 inline h-5 w-5 align-middle"
             />
-            <Trans>View plans</Trans>
+            <Trans>Ver planos</Trans>
           </Button>
         </Section>
       </Section>
