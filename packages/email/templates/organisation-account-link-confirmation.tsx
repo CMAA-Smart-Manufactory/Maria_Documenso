@@ -67,9 +67,9 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
             <Section className="p-2 text-slate-500">
               <Text className="text-center text-lg font-medium text-black">
                 {type === 'create' ? (
-                  <Trans>Account creation request</Trans>
+                  <Trans>Solicitação de criação de conta</Trans>
                 ) : (
-                  <Trans>Link your Documenso account</Trans>
+                  <Trans>Vincule sua conta Documenso</Trans>
                 )}
               </Text>
 
@@ -81,8 +81,8 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
                   </Trans>
                 ) : (
                   <Trans>
-                    <span className="font-bold">{organisationName}</span> has requested to link your
-                    current Documenso account to their organisation.
+                    <span className="font-bold">{organisationName}</span> solicitou a criação de uma
+                    conta em seu nome.
                   </Trans>
                 )}
               </Text>
@@ -118,16 +118,16 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
 
               <Section className="mb-6 mt-8 text-center">
                 <Button
-                  className="bg-documenso-500 inline-flex items-center justify-center rounded-lg px-6 py-3 text-center text-sm font-medium text-black no-underline"
+                  className="inline-flex items-center justify-center rounded-lg bg-documenso-500 px-6 py-3 text-center text-sm font-medium text-black no-underline"
                   href={confirmationLink}
                 >
-                  <Trans>Review request</Trans>
+                  <Trans>Solicitação de revisão</Trans>
                 </Button>
               </Section>
             </Section>
 
             <Text className="text-center text-xs text-slate-500">
-              <Trans>Link expires in 30 minutes.</Trans>
+              <Trans>O link expira em 30 minutos.</Trans>
             </Text>
           </Container>
 

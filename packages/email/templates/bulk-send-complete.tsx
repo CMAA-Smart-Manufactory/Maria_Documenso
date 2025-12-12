@@ -33,23 +33,25 @@ export const BulkSendCompleteEmail = ({
           <Container className="mx-auto mb-2 mt-8 max-w-xl rounded-lg border border-solid border-slate-200 p-4 backdrop-blur-sm">
             <Section>
               <Text className="text-sm">
-                <Trans>Hi {userName},</Trans>
+                <Trans>Olá {userName},</Trans>
               </Text>
 
               <Text className="text-sm">
-                <Trans>Your bulk send operation for template "{templateName}" has completed.</Trans>
+                <Trans>
+                  Sua operação de envio em massa para o modelo "{templateName}" foi concluído.
+                </Trans>
               </Text>
 
               <Text className="text-lg font-semibold">
-                <Trans>Summary:</Trans>
+                <Trans>Resumo:</Trans>
               </Text>
 
               <ul className="my-2 ml-4 list-inside list-disc">
                 <li>
-                  <Trans>Total rows processed: {totalProcessed}</Trans>
+                  <Trans>Total de linhas processadas:: {totalProcessed}</Trans>
                 </li>
                 <li className="mt-1">
-                  <Trans>Successfully created: {successCount}</Trans>
+                  <Trans>Criado com sucesso: {successCount}</Trans>
                 </li>
                 <li className="mt-1">
                   <Trans>Failed: {failedCount}</Trans>
@@ -59,12 +61,12 @@ export const BulkSendCompleteEmail = ({
               {failedCount > 0 && (
                 <Section className="mt-4">
                   <Text className="text-lg font-semibold">
-                    <Trans>The following errors occurred:</Trans>
+                    <Trans>Ocorreram os seguintes erros:</Trans>
                   </Text>
 
                   <ul className="my-2 ml-4 list-inside list-disc">
                     {errors.map((error, index) => (
-                      <li key={index} className="text-destructive mt-1 text-sm text-slate-400">
+                      <li key={index} className="mt-1 text-sm text-destructive text-slate-400">
                         {error}
                       </li>
                     ))}
@@ -74,8 +76,8 @@ export const BulkSendCompleteEmail = ({
 
               <Text className="text-sm">
                 <Trans>
-                  You can view the created documents in your dashboard under the "Documents created
-                  from template" section.
+                  Você pode visualizar os documentos criados no seu painel na seção "Documentos
+                  criados a partir do modelo".
                 </Trans>
               </Text>
             </Section>

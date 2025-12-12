@@ -57,13 +57,13 @@ export const TeamEmailRemovedTemplate = ({
 
             <Section className="p-2 text-slate-500">
               <Text className="text-center text-lg font-medium text-black">
-                <Trans>Team email removed</Trans>
+                <Trans>E-mail da equipe removido</Trans>
               </Text>
 
               <Text className="my-1 text-center text-base">
                 <Trans>
-                  The team email <span className="font-bold">{teamEmail}</span> has been removed
-                  from the following team
+                  O e-mail da equipe <span className="font-bold">{teamEmail}</span> foi removido da
+                  seguinte equipe
                 </Trans>
               </Text>
 

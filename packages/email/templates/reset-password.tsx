@@ -33,15 +33,7 @@ export const ResetPasswordTemplate = ({
         <Section>
           <Container className="mx-auto mb-2 mt-8 max-w-xl rounded-lg border border-solid border-slate-200 p-4 backdrop-blur-sm">
             <Section>
-              {branding.brandingEnabled && branding.brandingLogo ? (
-                <Img src={branding.brandingLogo} alt="Branding Logo" className="mb-4 h-6" />
-              ) : (
-                <Img
-                  src={getAssetUrl('/static/logo.png')}
-                  alt="Documenso Logo"
-                  className="mb-4 h-6"
-                />
-              )}
+              <Img src={getAssetUrl('/static/logo.png')} alt="Maria Sign" className="mb-4 h-6" />
 
               <TemplateResetPassword
                 userName={userName}
@@ -64,16 +56,16 @@ export const ResetPasswordTemplate = ({
 
               <Text className="mt-2 text-base text-slate-400">
                 <Trans>
-                  We've changed your password as you asked. You can now sign in with your new
-                  password.
+                  Alteramos sua senha conforme solicitado. Agora você pode entrar com sua nova
+                  senha.
                 </Trans>
               </Text>
               <Text className="mt-2 text-base text-slate-400">
                 <Trans>
-                  Didn't request a password change? We are here to help you secure your account,
-                  just{' '}
-                  <Link className="text-documenso-700 font-normal" href="mailto:hi@documenso.com">
-                    contact us.
+                  Não solicitou uma alteração de senha? Estamos aqui para ajudar você a proteger sua
+                  conta. basta{' '}
+                  <Link className="font-normal text-documenso-700" href="mailto:hi@documenso.com">
+                    Contate-nos.
                   </Link>
                 </Trans>
               </Text>

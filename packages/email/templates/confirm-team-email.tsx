@@ -69,13 +69,13 @@ export const ConfirmTeamEmailTemplate = ({
 
             <Section className="p-2 text-slate-500">
               <Text className="text-center text-lg font-medium text-black">
-                <Trans>Verify your team email address</Trans>
+                <Trans>Verifique o endereço de e-mail da sua equipe.</Trans>
               </Text>
 
               <Text className="text-center text-base">
                 <Trans>
-                  <span className="font-bold">{teamName}</span> has requested to use your email
-                  address for their team on Documenso.
+                  <span className="font-bold">{teamName}</span> solicitou o uso do seu endereço de
+                  e-mail para a equipe deles no Documenso.
                 </Trans>
               </Text>
 
@@ -86,43 +86,48 @@ export const ConfirmTeamEmailTemplate = ({
               <Section className="mt-6">
                 <Text className="my-0 text-sm">
                   <Trans>
-                    By accepting this request, you will be granting <strong>{teamName}</strong>{' '}
-                    access to:
+                    Ao aceitar esta solicitação, você estará concedendo <strong>{teamName}</strong>{' '}
+                    acesso a:
                   </Trans>
                 </Text>
 
                 <ul className="mb-0 mt-2">
                   <li className="text-sm">
-                    <Trans>View all documents sent to and from this email address</Trans>
+                    <Trans>
+                      Veja todos os documentos enviados para e recebidos deste endereço de e-mail.
+                    </Trans>
                   </li>
                   <li className="mt-1 text-sm">
-                    <Trans>Allow document recipients to reply directly to this email address</Trans>
+                    <Trans>
+                      Permitir que os destinatários do documento respondam diretamente a este
+                      endereço de e-mail.
+                    </Trans>
                   </li>
                   <li className="mt-1 text-sm">
-                    <Trans>Send documents on behalf of the team using the email address</Trans>
+                    <Trans>Envie documentos em nome da equipe usando o endereço de e-mail.</Trans>
                   </li>
                 </ul>
 
                 <Text className="mt-2 text-sm">
                   <Trans>
-                    You can revoke access at any time in your team settings on Documenso{' '}
-                    <Link href={`${baseUrl}/settings/teams`}>here.</Link>
+                    Você pode revogar o acesso a qualquer momento nas configurações da sua equipe no
+                    Maria Sign. <Link href={`${baseUrl}/settings/teams`}>aqui.</Link>
                   </Trans>
                 </Text>
               </Section>
 
               <Section className="mb-6 mt-8 text-center">
                 <Button
-                  className="bg-documenso-500 inline-flex items-center justify-center rounded-lg px-6 py-3 text-center text-sm font-medium text-black no-underline"
+                  className="inline-flex items-center justify-center rounded-lg bg-documenso-500 px-6 py-3 text-center text-sm font-medium text-black no-underline"
                   href={`${baseUrl}/team/verify/email/${token}`}
                 >
-                  <Trans>Accept</Trans>
+                  <Trans>Aceitar</Trans>
                 </Button>
               </Section>
             </Section>
 
             <Text className="text-center text-xs text-slate-500">
-              <Trans>Link expires in 1 hour.</Trans>
+              <Trans>O link expira em 1 hora.</Trans>
             </Text>
           </Container>
 

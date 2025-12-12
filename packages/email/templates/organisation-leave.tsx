@@ -57,7 +57,7 @@ export const OrganisationLeaveEmailTemplate = ({
 
             <Section className="p-2 text-slate-500">
               <Text className="text-center text-lg font-medium text-black">
-                <Trans>A member has left your organisation {organisationName}</Trans>
+                <Trans>Um membro deixou sua organização. {organisationName}</Trans>
               </Text>
 
               <div className="mx-auto my-2 w-fit rounded-lg bg-gray-50 px-4 py-2 text-base font-medium text-slate-600">
