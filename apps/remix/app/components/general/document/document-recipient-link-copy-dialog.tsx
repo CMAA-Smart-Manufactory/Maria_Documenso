@@ -25,6 +25,8 @@ import {
 } from '@documenso/ui/primitives/dialog';
 import { useToast } from '@documenso/ui/primitives/use-toast';
 
+import { QRCodeSVG } from 'qrcode.react';
+
 /**
  * Hook corrigido para funcionar em http://
  */
@@ -159,25 +161,63 @@ export const DocumentRecipientLinkCopyDialog = ({
               />
 
               {recipient.role !== RecipientRole.CC && (
-                <CopyTextButton
-                  value={formatSigningLink(recipient.token)}
-                  onCopySuccess={() => {
-                    toast({
-                      title: _(msg`Copied to clipboard`),
-                      description: _(msg`The signing link has been copied to your clipboard.`),
-                    });
-                  }}
-                  badgeContentUncopied={
-                    <p className="ml-1 text-xs">
-                      <Trans>Copy</Trans>
-                    </p>
-                  }
-                  badgeContentCopied={
-                    <p className="ml-1 text-xs">
-                      <Trans>Copied</Trans>
-                    </p>
-                  }
-                />
+                <div className="flex gap-2">
+                  <CopyTextButton
+                    value={formatSigningLink(recipient.token)}
+                    onCopySuccess={() => {
+                      toast({
+                        title: _(msg`Copied to clipboard`),
+                        description: _(msg`The signing link has been copied to your clipboard.`),
+                      });
+                    }}
+                    badgeContentUncopied={
+                      <p className="ml-1 text-xs">
+                        <Trans>Copy</Trans>
+                      </p>
+                    }
+                    badgeContentCopied={
+                      <p className="ml-1 text-xs">
+                        <Trans>Copied</Trans>
+                      </p>
+                    }
+                  />
+
+                  {/* Botão para abrir QRCode */}
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="outline" size="sm">
+                        <Trans>QRCode</Trans>
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent position="center">
+                      <DialogHeader>
+                        <DialogTitle>
+                          <Trans>QR Code</Trans>
+                        </DialogTitle>
+                        <DialogDescription>
+                          <Trans>Escaneie para abrir o link de assinatura</Trans>
+                        </DialogDescription>
+                      </DialogHeader>
+
+                      <div className="flex justify-center py-6">
+                        <QRCodeSVG
+                          value={formatSigningLink(recipient.token)}
+                          size={200}
+                          level="H"
+                          includeMargin
+                        />
+                      </div>
+
+                      <DialogFooter>
+                        <DialogClose asChild>
+                          <Button type="button" variant="secondary">
+                            <Trans>Fechar</Trans>
+                          </Button>
+                        </DialogClose>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                </div>
               )}
             </li>
           ))}
