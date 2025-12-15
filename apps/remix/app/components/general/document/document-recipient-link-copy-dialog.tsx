@@ -5,12 +5,12 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import type { Recipient } from '@prisma/client';
 import { RecipientRole } from '@prisma/client';
+import { QRCodeSVG } from 'qrcode.react';
 import { useSearchParams } from 'react-router';
 
 import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
 import { RECIPIENT_ROLES_DESCRIPTION } from '@documenso/lib/constants/recipient-roles';
 import { formatSigningLink } from '@documenso/lib/utils/recipients';
-import { CopyTextButton } from '@documenso/ui/components/common/copy-text-button';
 import { AvatarWithText } from '@documenso/ui/primitives/avatar';
 import { Button } from '@documenso/ui/primitives/button';
 import {
@@ -25,8 +25,6 @@ import {
 } from '@documenso/ui/primitives/dialog';
 import { useToast } from '@documenso/ui/primitives/use-toast';
 
-import { QRCodeSVG } from 'qrcode.react';
-
 /**
  * Hook corrigido para funcionar em http://
  */
@@ -35,24 +33,27 @@ function useCopyToClipboard(): [string | null, (text: string) => void] {
 
   const copy = (text: string) => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(() => {
-        setCopiedText(text);
-      }).catch(() => {
-        // fallback para http://
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.style.position = 'fixed';
-        document.body.appendChild(textarea);
-        textarea.focus();
-        textarea.select();
-        try {
-          document.execCommand('copy');
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
           setCopiedText(text);
-        } catch (err) {
-          console.error('Fallback copy failed', err);
-        }
-        document.body.removeChild(textarea);
-      });
+        })
+        .catch(() => {
+          // fallback para http://
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          textarea.style.position = 'fixed';
+          document.body.appendChild(textarea);
+          textarea.focus();
+          textarea.select();
+          try {
+            document.execCommand('copy');
+            setCopiedText(text);
+          } catch (err) {
+            console.error('Fallback copy failed', err);
+          }
+          document.body.removeChild(textarea);
+        });
     } else {
       // se não existir navigator.clipboard
       const textarea = document.createElement('textarea');
@@ -96,10 +97,7 @@ export const DocumentRecipientLinkCopyDialog = ({
   const onBulkCopy = () => {
     const generatedString = recipients
       .filter((recipient) => recipient.role !== RecipientRole.CC)
-      .map(
-        (recipient) =>
-          `${recipient.email}\n${NEXT_PUBLIC_WEBAPP_URL()}/sign/${recipient.token}`,
-      )
+      .map((recipient) => `${recipient.email}\n${NEXT_PUBLIC_WEBAPP_URL()}/sign/${recipient.token}`)
       .join('\n\n');
 
     copy(generatedString);
@@ -136,7 +134,7 @@ export const DocumentRecipientLinkCopyDialog = ({
           </DialogDescription>
         </DialogHeader>
 
-        <ul className="text-muted-foreground divide-y rounded-lg border">
+        <ul className="divide-y rounded-lg border text-muted-foreground">
           {recipients.length === 0 && (
             <li className="flex flex-col items-center justify-center py-6 text-sm">
               <Trans>No recipients</Trans>
@@ -144,17 +142,12 @@ export const DocumentRecipientLinkCopyDialog = ({
           )}
 
           {recipients.map((recipient) => (
-            <li
-              key={recipient.id}
-              className="flex items-center justify-between px-4 py-3 text-sm"
-            >
+            <li key={recipient.id} className="flex items-center justify-between px-4 py-3 text-sm">
               <AvatarWithText
                 avatarFallback={recipient.email.slice(0, 1).toUpperCase()}
-                primaryText={
-                  <p className="text-muted-foreground text-sm">{recipient.email}</p>
-                }
+                primaryText={<p className="text-sm text-muted-foreground">{recipient.email}</p>}
                 secondaryText={
-                  <p className="text-muted-foreground/70 text-xs">
+                  <p className="text-xs text-muted-foreground/70">
                     {_(RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName)}
                   </p>
                 }
@@ -162,7 +155,7 @@ export const DocumentRecipientLinkCopyDialog = ({
 
               {recipient.role !== RecipientRole.CC && (
                 <div className="flex gap-2">
-                  <CopyTextButton
+                  {/* <CopyTextButton
                     value={formatSigningLink(recipient.token)}
                     onCopySuccess={() => {
                       toast({
@@ -180,7 +173,14 @@ export const DocumentRecipientLinkCopyDialog = ({
                         <Trans>Copied</Trans>
                       </p>
                     }
-                  />
+                  /> */}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => window.open(formatSigningLink(recipient.token), '_blank')}
+                  >
+                    <Trans>Abrir</Trans>
+                  </Button>
 
                   {/* Botão para abrir QRCode */}
                   <Dialog>
